@@ -15,7 +15,7 @@ class GeoFileParser
 {
 public:
 
-    explicit GeoFileParser(std::string filepath);
+    explicit GeoFileParser(const std::string& filepath);
 
     const std::string& GetFilepath () const;
 

@@ -7,9 +7,7 @@
 
 GeoPoint::GeoPoint ()
 : m_ID(0), m_X(0.0), m_Y(0.0), m_Z(0.0), m_End(true)
-{
-
-}
+{ }
 
 GeoPoint::GeoPoint (unsigned int id, double x, double y, double z)
 : m_ID(id), m_X(x), m_Y(y), m_Z(z), m_End(false)

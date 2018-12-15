@@ -8,7 +8,7 @@
 #include <Geometry/GeoFileParser.hpp>
 
 
-GeoFileParser::GeoFileParser (std::string filepath)
+GeoFileParser::GeoFileParser (const std::string& filepath)
 : m_Filepath(filepath), m_Filename(filepath), m_File(filepath),
   m_CurrentGeoLine(1), m_End(false)
 {

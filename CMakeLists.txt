@@ -8,6 +8,7 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
 endif()
 
 add_subdirectory(Geometry)
+add_subdirectory(Utility)
 
 add_executable(FluidSim FluidSim.cpp)
-target_link_libraries(FluidSim Geometry)
+target_link_libraries(FluidSim Geometry Utility)

@@ -8,12 +8,16 @@
 #include <string>
 #include <vector>
 
+#include <Utility/Boundary.hpp>
+
 #include <Geometry/Geometry.hpp>
 
 
 class GeometrySet
 {
 public:
+
+    GeometrySet ();
 
     explicit GeometrySet (const std::string& filepath);
 
@@ -23,6 +27,10 @@ public:
 private:
 
     std::vector<Geometry> m_Geometries;
+
+    Boundary<double> m_Boundary;
+
+    void UpdateBoundary (const Geometry& geometry);
 
 
 };

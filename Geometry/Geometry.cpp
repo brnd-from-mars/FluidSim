@@ -2,38 +2,32 @@
 // Created by Brendan Berg on 15.12.18.
 //
 
-#include <Geometry/Geometry.hpp>
-
 #include <iostream>
-#include <limits>
+
+#include <Geometry/Geometry.hpp>
 
 
 Geometry::Geometry (GeoFileParser& parser)
 {
-    constexpr auto maxDouble = std::numeric_limits<double>::max();
-    constexpr auto minDouble = std::numeric_limits<double>::lowest();
-    m_MinX = maxDouble;
-    m_MaxX = minDouble;
-    m_MinY = maxDouble;
-    m_MaxY = minDouble;
-
-    GeoPoint gp;
+    GeoPoint geoPoint;
 
     do
     {
-        gp = parser.ParsePoint();
-        if (!gp.IsEnd())
+        geoPoint = parser.ParsePoint();
+        if (!geoPoint.IsEnd())
         {
-            m_Points.push_back(gp);
-            CheckBoundaries(m_Points.back());
+            m_Points.push_back(geoPoint);
+            m_Boundary.EnlargeToPoint(m_Points.back().GetCoordinate());
         }
-    } while(!gp.IsEnd());
+    } while(!geoPoint.IsEnd());
 
 #ifdef DEBUG
-    std::cout << "Created Geometry " << std::endl
+    std::cout << "Constructed Geometry " << std::endl
               << "\tPoints       : " << GetSize() << std::endl
-              << "\tBoundaries X : " << m_MinX << " - " << m_MaxX << std::endl
-              << "\tBoundaries Y : " << m_MinY << " - " << m_MaxY << std::endl;
+              << "\tBoundary X : " << m_Boundary.min.x << " - "
+                                   << m_Boundary.max.x << std::endl
+              << "\tBoundary Y : " << m_Boundary.min.y << " - "
+                                   << m_Boundary.max.y << std::endl;
 #endif
 }
 
@@ -44,11 +38,7 @@ unsigned int Geometry::GetSize () const
 }
 
 
-void Geometry::CheckBoundaries (const GeoPoint& point)
+const Boundary<double>& Geometry::GetBoundary () const
 {
-    m_MinX = std::min(m_MinX, point.GetX());
-    m_MaxX = std::max(m_MaxX, point.GetX());
-
-    m_MinY = std::min(m_MinY, point.GetY());
-    m_MaxY = std::max(m_MaxY, point.GetY());
+    return m_Boundary;
 }

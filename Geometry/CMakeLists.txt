@@ -7,3 +7,5 @@ add_library(Geometry
 target_include_directories(Geometry
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_link_libraries(Geometry Utility)

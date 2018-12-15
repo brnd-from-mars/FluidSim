@@ -7,6 +7,9 @@
 
 #include <vector>
 
+#include <Utility/Boundary.hpp>
+#include <Utility/Point.hpp>
+
 #include <Geometry/GeoFileParser.hpp>
 #include <Geometry/GeoPoint.hpp>
 
@@ -19,20 +22,14 @@ public:
 
     unsigned int GetSize () const;
 
+    const Boundary<double>& GetBoundary () const;
+
 
 private:
 
     std::vector<GeoPoint> m_Points;
 
-    double m_MinX;
-
-    double m_MaxX;
-
-    double m_MinY;
-
-    double m_MaxY;
-
-    void CheckBoundaries (const GeoPoint& point);
+    Boundary<double> m_Boundary;
 
 };
 

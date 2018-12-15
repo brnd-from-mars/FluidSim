@@ -22,7 +22,7 @@ GeoFileParser::GeoFileParser (const std::string& filepath)
 
 
 #ifdef DEBUG
-    std::cout << "Created GeoFileParser " << std::endl
+    std::cout << "Constructed GeoFileParser " << std::endl
               << "\tFilepath : " << m_Filepath << std::endl
               << "\tFilename : " << m_Filename << std::endl;
 #endif

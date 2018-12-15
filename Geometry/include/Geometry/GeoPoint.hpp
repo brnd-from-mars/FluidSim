@@ -5,6 +5,8 @@
 #ifndef FLUIDSIM_GEOPOINT_HPP
 #define FLUIDSIM_GEOPOINT_HPP
 
+#include <Utility/Point.hpp>
+
 
 class GeoPoint
 {
@@ -20,6 +22,8 @@ public:
 
     double GetZ () const;
 
+    const Point<double>& GetCoordinate () const;
+
     bool IsEnd () const;
 
 
@@ -27,11 +31,7 @@ private:
 
     unsigned int m_ID;
 
-    double m_X;
-
-    double m_Y;
-
-    double m_Z;
+    Point<double> m_Coordinate;
 
     bool m_End;
 

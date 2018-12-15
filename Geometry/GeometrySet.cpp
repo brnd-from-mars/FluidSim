@@ -21,9 +21,4 @@ void GeometrySet::ParseFile (const std::string& filepath)
     {
         m_Geometries.emplace_back(parser);
     }
-
-    while (m_Geometries.back().GetSize() == 0)
-    {
-        m_Geometries.pop_back();
-    }
 }

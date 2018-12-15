@@ -22,7 +22,9 @@ GeoFileParser::GeoFileParser (const std::string& filepath)
 
 
 #ifdef DEBUG
-    std::cout << "Created GeoFileParser: " << m_Filename << std::endl;
+    std::cout << "Created GeoFileParser " << std::endl
+              << "\tFilepath : " << m_Filepath << std::endl
+              << "\tFilename : " << m_Filename << std::endl;
 #endif
 }
 
@@ -47,7 +49,7 @@ unsigned int GeoFileParser::GetCurrentGeoLine () const
 
 bool GeoFileParser::IsEnd () const
 {
-    return m_End;
+    return m_End || !m_File.good();
 }
 
 

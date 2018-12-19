@@ -5,6 +5,7 @@
 #ifndef FLUIDSIM_BOUNDARY_HPP
 #define FLUIDSIM_BOUNDARY_HPP
 
+#include <algorithm>
 #include <limits>
 
 #include <Utility/Point.hpp>
@@ -31,7 +32,31 @@ struct Boundary
         max.z = std::max(max.z, point.z);
     }
 
-    static auto combine (const Boundary<T>& lhs, const Boundary<T>& rhs)
+    Point<T> GetSize () const
+    {
+        Point<T> result {max.x - min.x, max.y - min.y, max.z - min.z};
+        return result;
+    }
+
+    Point<T> GetCenterCoordinate () const
+    {
+        Point<double> result {(max.x + min.x) / 2.0,
+                              (max.y + min.y) / 2.0,
+                              (max.z + min.z) / 2.0};
+        return result;
+    }
+
+    bool operator== (const Boundary<T>& rhs) const
+    {
+        return (min == rhs.min) && (max == rhs.max);
+    }
+
+    bool operator!= (const Boundary<T>& rhs) const
+    {
+        return !(*this == rhs);
+    }
+
+    static auto Combine (const Boundary<T>& lhs, const Boundary<T>& rhs)
     {
         Boundary<T> result;
 
@@ -46,6 +71,8 @@ struct Boundary
 
         return result;
     }
+
+
 };
 
 

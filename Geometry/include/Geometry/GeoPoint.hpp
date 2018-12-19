@@ -14,6 +14,8 @@ public:
 
     GeoPoint ();
 
+    explicit GeoPoint (double end);
+
     GeoPoint (unsigned int id, double x, double y, double z);
 
     double GetX () const;
@@ -25,6 +27,8 @@ public:
     const Point<double>& GetCoordinate () const;
 
     bool IsEnd () const;
+
+    bool IsCircular () const;
 
 
 private:

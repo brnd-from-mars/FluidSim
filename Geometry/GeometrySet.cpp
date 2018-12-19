@@ -46,5 +46,17 @@ void GeometrySet::ParseFile (const std::string& filepath)
 
 void GeometrySet::UpdateBoundary (const Geometry& geometry)
 {
-    m_Boundary = Boundary<double>::combine(m_Boundary, geometry.GetBoundary());
+    m_Boundary = Boundary<double>::Combine(m_Boundary, geometry.GetBoundary());
+}
+
+
+const std::vector<Geometry>& GeometrySet::GetGeometries () const
+{
+    return m_Geometries;
+}
+
+
+const Boundary<double>& GeometrySet::GetBoundary () const
+{
+    return m_Boundary;
 }

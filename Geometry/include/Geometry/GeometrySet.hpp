@@ -23,6 +23,10 @@ public:
 
     void ParseFile (const std::string& filepath);
 
+    const std::vector<Geometry>& GetGeometries() const;
+
+    const Boundary<double>& GetBoundary () const;
+
 
 private:
 

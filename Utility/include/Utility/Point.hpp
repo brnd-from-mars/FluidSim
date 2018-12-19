@@ -9,9 +9,35 @@
 template <typename T>
 struct Point
 {
-    T x;
-    T y;
-    T z;
+    union
+    {
+        T x;
+        T width;
+    };
+
+    union
+    {
+        T y;
+        T height;
+    };
+
+    union
+    {
+        T z;
+        T depth;
+    };
+
+    bool operator== (const Point<T>& rhs) const
+    {
+        return (x == rhs.x) && (y == rhs.y) && (z == rhs.z);
+    }
+
+    bool operator!= (const Point<T>& rhs) const
+    {
+        return !(*this != rhs);
+    }
+
+
 };
 
 

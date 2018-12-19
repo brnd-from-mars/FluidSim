@@ -20,7 +20,9 @@ public:
 
     explicit Geometry (GeoFileParser& parser);
 
-    unsigned int GetSize () const;
+    unsigned int GetPointNumber () const;
+
+    const std::vector<GeoPoint>& GetPoints () const;
 
     const Boundary<double>& GetBoundary () const;
 
@@ -30,6 +32,8 @@ private:
     std::vector<GeoPoint> m_Points;
 
     Boundary<double> m_Boundary;
+
+    void AppendPoint (const GeoPoint& point);
 
 };
 

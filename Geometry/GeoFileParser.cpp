@@ -79,6 +79,10 @@ GeoPoint GeoFileParser::ParsePoint ()
             }
             else
             {
+                auto end = std::stod(ParseElement(fileline));
+
+                geoPoint = GeoPoint(end);
+
                 m_CurrentGeoLine++;
             }
         }

@@ -11,19 +11,29 @@ Geometry::Geometry (GeoFileParser& parser)
 {
     GeoPoint geoPoint;
 
-    do
+    bool atEnd = false;
+
+    while (!atEnd)
     {
         geoPoint = parser.ParsePoint();
-        if (!geoPoint.IsEnd())
+        if (geoPoint.IsEnd())
         {
-            m_Points.push_back(geoPoint);
-            m_Boundary.EnlargeToPoint(m_Points.back().GetCoordinate());
+            if (geoPoint.IsCircular())
+            {
+                AppendPoint(m_Points.front());
+            }
+
+            atEnd = true;
         }
-    } while(!geoPoint.IsEnd());
+        else
+        {
+            AppendPoint(geoPoint);
+        }
+    }
 
 #ifdef DEBUG
     std::cout << "Constructed Geometry " << std::endl
-              << "\tPoints       : " << GetSize() << std::endl
+              << "\tPoints       : " << GetPointNumber() << std::endl
               << "\tBoundary X : " << m_Boundary.min.x << " - "
                                    << m_Boundary.max.x << std::endl
               << "\tBoundary Y : " << m_Boundary.min.y << " - "
@@ -32,13 +42,26 @@ Geometry::Geometry (GeoFileParser& parser)
 }
 
 
-unsigned int Geometry::GetSize () const
+unsigned int Geometry::GetPointNumber () const
 {
     return static_cast<unsigned int>(m_Points.size());
+}
+
+
+const std::vector<GeoPoint>& Geometry::GetPoints () const
+{
+    return m_Points;
 }
 
 
 const Boundary<double>& Geometry::GetBoundary () const
 {
     return m_Boundary;
+}
+
+
+void Geometry::AppendPoint (const GeoPoint& point)
+{
+    m_Points.push_back(point);
+    m_Boundary.EnlargeToPoint(point.GetCoordinate());
 }

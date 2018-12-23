@@ -7,6 +7,7 @@
 #include "Graphics/Renderable.hpp"
 
 
-Renderable::Renderable (sf::RenderWindow& window)
-: m_Window(window)
+Renderable::Renderable (std::shared_ptr<sf::RenderWindow> window,
+                        const RenderUtility& transformUtility)
+: m_Window(std::move(window)), m_TransformUtility(transformUtility)
 { }

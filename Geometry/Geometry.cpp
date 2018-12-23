@@ -33,7 +33,7 @@ Geometry::Geometry (GeoFileParser& parser)
 
 #ifdef DEBUG
     std::cout << "Constructed Geometry " << std::endl
-              << "\tPoints       : " << GetPointNumber() << std::endl
+              << "\tPoints     : " << GetPointNumber() << std::endl
               << "\tBoundary X : " << m_Boundary.min.x << " - "
                                    << m_Boundary.max.x << std::endl
               << "\tBoundary Y : " << m_Boundary.min.y << " - "

@@ -5,52 +5,27 @@
 #include <iostream>
 #include <vector>
 
-#include <SFML/graphics.hpp>
-
 #include <Geometry/GeometrySet.hpp>
-#include <Graphics/RenderableGeometry.hpp>
+#include <Mesh/Mesh.hpp>
+#include <Graphics/RenderController.hpp>
 
-
-// TODO: Outsource sfml to graphics component
 
 int main ()
 {
-    sf::ContextSettings settings;
-    settings.antialiasingLevel = 1;
-    auto window = sf::RenderWindow(sf::VideoMode(1200, 700),
-                                   std::string("FluidSim"),
-                                   sf::Style::Default,
-                                   settings);
+    auto geometry = GeometrySet(std::string("Geometries/airfoil.fsg"));
 
-    auto geometry = GeometrySet(std::string("Geometries/airfoil2.fsg"));
+    auto mesh = Mesh(geometry.GetGeometries().front());
 
-    auto renderableGeometry = RenderableGeometry(window,geometry);
+    auto renderController = RenderController(1200, 800,
+                                             std::string("Fluid Simulation"),
+                                             mesh.GetBoundary());
 
-    while (window.isOpen())
+    renderController.CreateGeometryRenderer(geometry);
+    renderController.CreateMeshRenderer(mesh);
+
+    while (renderController.IsRunning())
     {
-        auto event = sf::Event();
-        while (window.pollEvent(event))
-        {
-            switch (event.type)
-            {
-                case sf::Event::Closed:
-                    window.close();
-                    break;
-                case sf::Event::KeyPressed:
-                    if (event.key.code == sf::Keyboard::Key::Escape)
-                    {
-                        window.close();
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        renderableGeometry.Draw();
-
-        window.setFramerateLimit(30);
-        window.display();
+        renderController.Draw();
     }
 
     return 0;

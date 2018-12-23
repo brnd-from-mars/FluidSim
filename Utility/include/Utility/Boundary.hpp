@@ -46,6 +46,12 @@ struct Boundary
         return result;
     }
 
+    bool ContainsPoint (const Point<T>& point) const
+    {
+        return min.x < point.x && point.x < max.x
+            && min.y < point.y && point.y < max.y;
+    }
+
     bool operator== (const Boundary<T>& rhs) const
     {
         return (min == rhs.min) && (max == rhs.max);
@@ -56,7 +62,7 @@ struct Boundary
         return !(*this == rhs);
     }
 
-    static auto Combine (const Boundary<T>& lhs, const Boundary<T>& rhs)
+    static Boundary<T> Combine (const Boundary<T>& lhs, const Boundary<T>& rhs)
     {
         Boundary<T> result;
 

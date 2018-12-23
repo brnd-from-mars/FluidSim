@@ -19,7 +19,8 @@ class RenderableGeometry : public Renderable
 {
 public:
 
-    RenderableGeometry (sf::RenderWindow& window,
+    RenderableGeometry (std::shared_ptr<sf::RenderWindow> window,
+                        const RenderUtility& transformUtility,
                         const GeometrySet& geometry);
 
     void Draw () override;
@@ -36,21 +37,6 @@ private:
     std::vector<sf::VertexArray> m_VertexArrays;
 
     void GenerateVertexArrays ();
-
-    sf::Vector2f GetGeometrySize () const;
-
-    sf::Vector2f GetTargetSize () const;
-
-    sf::Vector2f GetPrescaleTransform () const;
-
-    sf::Vector2f GetScaleFactor () const;
-
-    sf::Vector2f GetPostscaleTransform () const;
-
-    sf::Vertex TransformGeoPoint (const GeoPoint& point,
-                                  const sf::Vector2f& prescaleTransform,
-                                  const sf::Vector2f& scaleFactor,
-                                  const sf::Vector2f& postscaleTransform);
 
 
 };

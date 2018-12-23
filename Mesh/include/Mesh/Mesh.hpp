@@ -7,7 +7,7 @@
 
 #include <vector>
 
-// TODO: add the use of multiple objects
+// TODO: allow the use of multiple objects
 #include <Geometry/Geometry.hpp>
 #include <Utility/Boundary.hpp>
 #include <Utility/Point.hpp>

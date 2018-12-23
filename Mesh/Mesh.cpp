@@ -12,8 +12,8 @@
 Mesh::Mesh (const Geometry& geometry)
 : m_Geometry(geometry)
 {
-    CalculateMeshBoundary(1.0, 4.0);
-    GenerateMeshCells(3.0, 3.0);
+    CalculateMeshBoundary(2.0, 2.0);
+    GenerateMeshCells(6.0, 6.0);
 
 
 #ifdef DEBUG

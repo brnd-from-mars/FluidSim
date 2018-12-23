@@ -12,7 +12,7 @@
 
 int main ()
 {
-    auto geometry = GeometrySet(std::string("Geometries/airfoil.fsg"));
+    auto geometry = GeometrySet(std::string("Geometries/square.fsg"));
 
     auto mesh = Mesh(geometry.GetGeometries().front());
 
